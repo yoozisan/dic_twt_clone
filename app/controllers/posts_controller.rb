@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:content))
+    @post = Post.new(post_params)
     if @post.save
       redirect_to posts_path, notice: "投稿されました。"
     else
@@ -14,5 +14,24 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to posts_path, notice: "編集されました。"
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:content)
   end
 end
