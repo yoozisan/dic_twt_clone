@@ -1,5 +1,5 @@
 <h1>投稿画面</h1>
-<%= form_with(model: @post, local: true) do |form| %>
+<%= form_with(model: @post,url:choose_new_or_edit, local: true) do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= @post.errors.count %>件のエラーがあります。</h2>
@@ -16,5 +16,3 @@
   </div>
   <%= form.submit %>
 <% end %>
-
-<%# ,url:choose_new_or_edit %>
